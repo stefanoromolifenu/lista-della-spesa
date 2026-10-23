@@ -5,7 +5,7 @@ row.addEventListener('touchstart',e=>{if(dragging||e.target.closest('.grip,input
 row.addEventListener('touchmove',e=>{if(!tracking||dragging)return;const t=e.touches[0],dx=t.clientX-startX,dy=t.clientY-startY;if(!swiping){if(Math.abs(dy)>Math.abs(dx)&&Math.abs(dy)>7){tracking=false;return}if(Math.abs(dx)<5||Math.abs(dx)<Math.abs(dy)*1.15)return;swiping=true;shell.classList.add('swiping');document.querySelectorAll('.swipe-shell.swipe-open').forEach(other=>{if(other!==shell)other.classList.remove('swipe-open')})}e.preventDefault();lastX=Math.max(0,Math.min(76,baseX+dx));row.style.transform='translateX('+lastX+'px)'},{passive:false});
 function finishSwipe(cancel=false){if(!tracking&&!swiping)return;const moved=swiping;tracking=false;swiping=false;shell.classList.remove('swiping');row.style.transform='';if(moved)shell.classList.toggle('swipe-open',!cancel&&lastX>38)}
 row.addEventListener('touchend',()=>finishSwipe(),{passive:true});row.addEventListener('touchcancel',()=>finishSwipe(true),{passive:true});
-box.append(shell)}else box.append(row)}}parent.append(box)}}let select=$('productZone'),old=select.value;select.replaceChildren();for(let z of state.zones){let option=el('option',z.name);option.value=z.id;select.append(option)}if([...select.options].some(o=>o.value===old))select.value=old}let activeRenameCancel=null;
+box.append(shell)}else box.append(row)}}parent.append(box)}}}let activeRenameCancel=null;
 document.addEventListener('pointerdown',e=>{if(activeRenameCancel&&!e.target.closest('.rename-controls'))activeRenameCancel()},{capture:true});
 function editable(item,type){
   let label=el('span',item.name,'editable');
